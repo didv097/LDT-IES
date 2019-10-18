@@ -90,7 +90,6 @@ f_ldt.write("\n")		# type of lamps
 f_ldt.write(num2str(lumens) + "\n")
 f_ldt.write("\n\n")		# 
 f_ldt.write(num2str(input_watts) + "\n")
-f_ldt.write(num2str(cnt_lamps) + "\n")
 for i in range(10):
 	f_ldt.write("1\n")
 for i in range(len(hor_angles)):
@@ -99,7 +98,7 @@ for i in range(len(ver_angles)):
 	f_ldt.write(num2str(ver_angles[i]) + "\n")
 for i in range(len(angles)):
 	for j in range(len(angles[i])):
-		f_ldt.write(num2str(angles[i][j]) + "\n")
+		f_ldt.write(num2str(angles[i][j] / lumens * 1000) + "\n")
 
 f_ies.close()
 f_ldt.close()
