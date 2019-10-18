@@ -38,7 +38,9 @@ cffli = float(f_ldt.readline())	# Conversion factor for luminous intensities (de
 toldm = float(f_ldt.readline())	# Tilt of luminaire during measurement (road lighting luminaires)
 num_set = int(f_ldt.readline())		# n - Number of standard sets of lamps
 num_lam = int(f_ldt.readline())		# Number of lamps
-type_lam = (f_ldt.readline())		# Type of lamps
+if num_lam < 0:
+	num_lam = -num_lam
+type_lam = f_ldt.readline()				# Type of lamps
 tlfl = float(f_ldt.readline())				# Total luminous flux of lamps (lm)
 col_temp = float(f_ldt.readline())		# Color appearance / color temperature of lamps
 col_ren = float(f_ldt.readline())		# Color rendering group / color rendering index
