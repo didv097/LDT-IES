@@ -1,5 +1,6 @@
 
 f_ldt = open("original.ldt", "r")
+f_ies = open("result.ies", "w")
 
 def num2str(n):
 	return "{:g}".format(n)
@@ -54,9 +55,6 @@ for i in range(0, mc):
 	for j in range(0, ng):
 		lum_intensity[i].append(float(f_ldt.readline()))
 
-
-f_ies = open("result.ies", "w")
-
 f_ies.write("IESNA:LM-63-2002\n")
 f_ies.write("[TEST] ")
 f_ies.write(user)
@@ -94,5 +92,8 @@ for i in range(0, mc):
 f_ies.write("\n")
 for i in range(0, mc):
 	for j in range(0, ng):
-		f_ies.write(num2str(lum_intensity[i][j]) + " ")
+		f_ies.write(num2str(lum_intensity[i][j] * float(tlfl) / 1000) + " ")
 	f_ies.write("\n")
+
+f_ldt.close()
+f_ies.close()
