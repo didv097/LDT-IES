@@ -17,9 +17,12 @@ lum_name = f_ldt.readline()			# Luminaire name
 lum_num = f_ldt.readline()			# Luminaire number
 file_name = f_ldt.readline()		# File name
 date = f_ldt.readline()					# Date/user
-temp = date.index("-")
-user = date[temp + 2 : len(date)]
-date = date[0 : temp - 1]
+temp = date.find("-")
+if temp >= 0:
+	user = date[temp + 2 : len(date)]
+	date = date[0 : temp - 1] + "\n"
+else:
+	user = "\n"
 length_lum = float(f_ldt.readline())		# Length/diameter of luminaire (mm)
 width_lum = float(f_ldt.readline())		# b - Width of luminaire (mm) (b = 0 for circular luminaire)
 height_lum = float(f_ldt.readline())		# Height of luminaire (mm)
@@ -36,7 +39,7 @@ toldm = float(f_ldt.readline())	# Tilt of luminaire during measurement (road lig
 num_set = int(f_ldt.readline())		# n - Number of standard sets of lamps
 num_lam = int(f_ldt.readline())		# Number of lamps
 type_lam = (f_ldt.readline())		# Type of lamps
-tlfl = int(f_ldt.readline())				# Total luminous flux of lamps (lm)
+tlfl = float(f_ldt.readline())				# Total luminous flux of lamps (lm)
 col_temp = float(f_ldt.readline())		# Color appearance / color temperature of lamps
 col_ren = float(f_ldt.readline())		# Color rendering group / color rendering index
 power = float(f_ldt.readline())			# Wattage including ballast (W)
@@ -53,7 +56,13 @@ lum_intensity = []
 for i in range(0, mc):
 	lum_intensity.append([])
 	for j in range(0, ng):
-		lum_intensity[i].append(float(f_ldt.readline()))
+		line = f_ldt.readline()
+		if line == "":
+			break
+		lum_intensity[i].append(float(line))
+	if j < ng - 1:
+		lum_intensity.pop()
+		break
 
 f_ies.write("IESNA:LM-63-2002\n")
 f_ies.write("[TEST] ")
@@ -64,7 +73,7 @@ f_ies.write("[MANUFAC] ")
 f_ies.write(company_name)
 f_ies.write("[ISSUEDATE] ")
 f_ies.write(date)
-f_ies.write("\n[LUMINAIRE] ")
+f_ies.write("[LUMINAIRE] ")
 f_ies.write(lum_name)
 f_ies.write("[_SERIALNUMBER] ")
 f_ies.write(meas_report)
@@ -90,8 +99,8 @@ f_ies.write("\n")
 for i in range(0, mc):
 	f_ies.write(num2str(angle_c[i]) + " ")
 f_ies.write("\n")
-for i in range(0, mc):
-	for j in range(0, ng):
+for i in range(0, len(lum_intensity)):
+	for j in range(0, len(lum_intensity[i])):
 		f_ies.write(num2str(lum_intensity[i][j] * float(tlfl) / 1000) + " ")
 	f_ies.write("\n")
 
