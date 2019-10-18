@@ -1,4 +1,4 @@
-# ldt2ies
+# LDT <-> IES
 
 ## python3 ies2ldt.py
 
