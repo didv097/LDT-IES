@@ -69,7 +69,7 @@ for i in range(0, mc):
 f_ies.write("IESNA:LM-63-2002\n")
 f_ies.write("[TEST] ")
 f_ies.write(user)
-f_ies.write("[TESTLAB] ")
+f_ies.write("[TESTLAB] \n")
 # f_ies.write(user)
 f_ies.write("[MANUFAC] ")
 f_ies.write(company_name)
