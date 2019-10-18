@@ -71,6 +71,35 @@ for i in range(cnt_hor_angles):
 f_ldt.write(manufac + "\n")
 f_ldt.write("2\n4\n")
 f_ldt.write(num2str(cnt_hor_angles) + "\n")
+f_ldt.write(num2str(hor_angles[1] - hor_angles[0]) + "\n")
+f_ldt.write(num2str(cnt_ver_angles) + "\n")
+f_ldt.write(num2str(ver_angles[1] - ver_angles[0]) + "\n")
+f_ldt.write(serial_number + "\n")
+f_ldt.write(luminaire + "\n")
+f_ldt.write("\n")		# luminaire number
+f_ldt.write("result.ldt\n")
+f_ldt.write(issue_date + "\n")
+f_ldt.write(num2str(length * 1000) + "\n")
+f_ldt.write(num2str(width * 1000) + "\n")
+f_ldt.write(num2str(height * 1000) + "\n")
+f_ldt.write(num2str(length * 1000) + "\n")
+f_ldt.write(num2str(width * 1000) + "\n")
+f_ldt.write("0\n0\n0\n0\n100\n100\n1\n0\n1\n")
+f_ldt.write(num2str(cnt_lamps) + "\n")
+f_ldt.write("\n")		# type of lamps
+f_ldt.write(num2str(lumens) + "\n")
+f_ldt.write("\n\n")		# 
+f_ldt.write(num2str(input_watts) + "\n")
+f_ldt.write(num2str(cnt_lamps) + "\n")
+for i in range(10):
+	f_ldt.write("1\n")
+for i in range(len(hor_angles)):
+	f_ldt.write(num2str(hor_angles[i]) + "\n")
+for i in range(len(ver_angles)):
+	f_ldt.write(num2str(ver_angles[i]) + "\n")
+for i in range(len(angles)):
+	for j in range(len(angles[i])):
+		f_ldt.write(num2str(angles[i][j]) + "\n")
 
 f_ies.close()
 f_ldt.close()
