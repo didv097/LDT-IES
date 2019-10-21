@@ -63,6 +63,7 @@ for i in range(0, mc):
 	if j < ng - 1:
 		lum_intensity.pop()
 		break
+mc = i
 
 f_ies.write("IESNA:LM-63-2002\n")
 f_ies.write("[TEST] ")
@@ -72,12 +73,15 @@ f_ies.write("[MANUFAC] ")
 f_ies.write(company_name)
 f_ies.write("[ISSUEDATE] ")
 f_ies.write(date)
-f_ies.write("[LUMCAT] ")
-f_ies.write(lum_num)
-f_ies.write("[LUMINAIRE] ")
-f_ies.write(lum_name)
-f_ies.write("[LAMP] ")
-f_ies.write(type_lam)
+if len(lum_num) > 1:
+	f_ies.write("[LUMCAT] ")
+	f_ies.write(lum_num)
+if len(lum_name) > 1:
+	f_ies.write("[LUMINAIRE] ")
+	f_ies.write(lum_name)
+if len(type_lam) > 1:
+	f_ies.write("[LAMP] ")
+	f_ies.write(type_lam)
 # f_ies.write("[_SERIALNUMBER] ")
 # f_ies.write(meas_report)
 f_ies.write("TILT=NONE\n")
@@ -92,9 +96,9 @@ f_ies.write(num2str(ng) + " ")
 f_ies.write(num2str(mc) + " ")
 f_ies.write(num2str(1) + " ")		# ? photometric type
 f_ies.write(num2str(2) + " ")		# ? unit type
-f_ies.write(num2str(width_lum / 1000) + " ")
-f_ies.write(num2str(length_lum / 1000) + " ")
-f_ies.write(num2str(height_lum / 1000) + "\n")
+f_ies.write(num2str(width_lum / 1000) + " ")		# ?
+f_ies.write(num2str(length_lum / 1000) + " ")		# ?
+f_ies.write(num2str(height_lum / 1000) + "\n")	# ?
 
 f_ies.write("1.0 1.0 ")			# ? ballast factor, future use
 f_ies.write(num2str(power))
