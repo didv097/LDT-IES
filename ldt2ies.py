@@ -19,7 +19,7 @@ file_name = f_ldt.readline()		# File name
 date = f_ldt.readline()					# Date/user
 temp = date.find("-")
 if temp >= 0:
-	user = date[temp + 2 : len(date)]
+	user = date[temp + 2 : len(date)]		# ?
 	date = date[0 : temp - 1] + "\n"
 else:
 	user = "\n"
@@ -38,8 +38,6 @@ cffli = float(f_ldt.readline())	# Conversion factor for luminous intensities (de
 toldm = float(f_ldt.readline())	# Tilt of luminaire during measurement (road lighting luminaires)
 num_set = int(f_ldt.readline())		# n - Number of standard sets of lamps
 num_lam = int(f_ldt.readline())		# Number of lamps
-if num_lam < 0:
-	num_lam = -num_lam
 type_lam = f_ldt.readline()				# Type of lamps
 tlfl = float(f_ldt.readline())				# Total luminous flux of lamps (lm)
 col_temp = float(f_ldt.readline())		# Color appearance / color temperature of lamps
@@ -68,22 +66,28 @@ for i in range(0, mc):
 
 f_ies.write("IESNA:LM-63-2002\n")
 f_ies.write("[TEST] ")
-f_ies.write(user)
-f_ies.write("[TESTLAB] \n")
+f_ies.write(meas_report)
 # f_ies.write(user)
 f_ies.write("[MANUFAC] ")
 f_ies.write(company_name)
 f_ies.write("[ISSUEDATE] ")
 f_ies.write(date)
+f_ies.write("[LUMCAT] ")
+f_ies.write(lum_num)
 f_ies.write("[LUMINAIRE] ")
 f_ies.write(lum_name)
-f_ies.write("[_SERIALNUMBER] ")
-f_ies.write(meas_report)
+f_ies.write("[LAMP] ")
+f_ies.write(type_lam)
+# f_ies.write("[_SERIALNUMBER] ")
+# f_ies.write(meas_report)
 f_ies.write("TILT=NONE\n")
 
-f_ies.write(num2str(num_lam) + " ")
-f_ies.write(num2str(tlfl) + " ")
-f_ies.write(num2str(1) + " ")		# ? multiplier
+if num_lam < 0:
+	f_ies.write("1 -1 ")
+else:
+	f_ies.write(num2str(num_lam) + " ")
+	f_ies.write(num2str(tlfl) + " ")	# ?
+f_ies.write(num2str(cffli) + " ")		# ? multiplier
 f_ies.write(num2str(ng) + " ")
 f_ies.write(num2str(mc) + " ")
 f_ies.write(num2str(1) + " ")		# ? photometric type
