@@ -1,4 +1,3 @@
-
 f_ies = open("original.ies", "r")
 f_ldt = open("result.ldt", "w")
 
