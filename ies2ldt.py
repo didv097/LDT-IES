@@ -5,6 +5,14 @@ f_ldt = open("result.ldt", "w")
 def num2str(n):
 	return "{:g}".format(n)
 
+test = ""
+manufac = ""
+issue_date = ""
+luminaire = ""
+lum_num = ""
+serial_number = ""
+type_lamp = ""
+
 f_ies.readline()
 while True:
 	line = f_ies.readline()
@@ -19,6 +27,10 @@ while True:
 			issue_date = line[cls_index + 2 : -1]
 		elif keyword == "LUMINAIRE":
 			luminaire = line[cls_index + 2 : -1]
+		elif keyword == "LUMCAT":
+			lum_num = line[cls_index + 2 : -1]
+		elif keyword == "LAMP":
+			type_lamp = line[cls_index + 2 : -1]
 		elif keyword == "_SERIALNUMBER":
 			serial_number = line[cls_index + 2 : -1]
 		continue
@@ -74,9 +86,9 @@ f_ldt.write(num2str(cnt_hor_angles) + "\n")
 f_ldt.write(num2str(hor_angles[1] - hor_angles[0]) + "\n")
 f_ldt.write(num2str(cnt_ver_angles) + "\n")
 f_ldt.write(num2str(ver_angles[1] - ver_angles[0]) + "\n")
-f_ldt.write(serial_number + "\n")
+f_ldt.write(test + "\n")
 f_ldt.write(luminaire + "\n")
-f_ldt.write("\n")		# luminaire number
+f_ldt.write(lum_num + "\n")		# luminaire number
 f_ldt.write("result.ldt\n")
 f_ldt.write(issue_date + "\n")
 f_ldt.write(num2str(length * 1000) + "\n")
@@ -84,9 +96,12 @@ f_ldt.write(num2str(width * 1000) + "\n")
 f_ldt.write(num2str(height * 1000) + "\n")
 f_ldt.write(num2str(length * 1000) + "\n")
 f_ldt.write(num2str(width * 1000) + "\n")
-f_ldt.write("0\n0\n0\n0\n100\n100\n1\n0\n1\n")
+f_ldt.write("0\n0\n0\n0\n")
+f_ldt.write("100\n100\n")
+f_ldt.write(num2str(multiplier) + "\n")
+f_ldt.write("0\n1\n")
 f_ldt.write(num2str(cnt_lamps) + "\n")
-f_ldt.write("\n")		# type of lamps
+f_ldt.write(type_lamp + "\n")		# type of lamps
 f_ldt.write(num2str(lumens) + "\n")
 f_ldt.write("\n\n")		# 
 f_ldt.write(num2str(input_watts) + "\n")
