@@ -102,16 +102,29 @@ f_ies.write(num2str(height_lum / 1000) + "\n")	# ?
 f_ies.write("1.0 1.0 ")			# ? ballast factor, future use
 f_ies.write(num2str(power))
 f_ies.write("\n")
+line = ""
 for i in range(0, ng):
-	f_ies.write(num2str(angle_g[i]) + " ")
-f_ies.write("\n")
+	if len(line + num2str(angle_g[i])) > 237:
+		f_ies.write(line + "\n")
+		line = " "
+	line += num2str(angle_g[i]) + " "
+f_ies.write(line + "\n")
+line = ""
 for i in range(0, mc):
-	f_ies.write(num2str(angle_c[i]) + " ")
-f_ies.write("\n")
+	if len(line + num2str(angle_c[i])) > 237:
+		f_ies.write(line + "\n")
+		line = " "
+	line += num2str(angle_c[i]) + " "
+f_ies.write(line + "\n")
 for i in range(0, len(lum_intensity)):
+	line = ""
 	for j in range(0, len(lum_intensity[i])):
-		f_ies.write(num2str(lum_intensity[i][j] * float(tlfl) / 1000) + " ")
-	f_ies.write("\n")
+		it = num2str(lum_intensity[i][j] * float(tlfl) / 1000)
+		if len(line + it) > 237:
+			f_ies.write(line + "\n")
+			line = " "
+		line += it + " "
+	f_ies.write(line + "\n")
 
 f_ldt.close()
 f_ies.close()
