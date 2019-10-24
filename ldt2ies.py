@@ -62,7 +62,6 @@ for i in range(0, mc):
 	if j < ng - 1:
 		lum_intensity.pop()
 		break
-mc = i
 
 f_ies.write("IESNA:LM-63-2002\n")
 f_ies.write("[TEST] ")
@@ -95,31 +94,31 @@ f_ies.write(num2str(ng) + " ")
 f_ies.write(num2str(mc) + " ")
 f_ies.write(num2str(1) + " ")		# ? photometric type
 f_ies.write(num2str(2) + " ")		# ? unit type
-f_ies.write(num2str(width_lum / 1000) + " ")		# ?
-f_ies.write(num2str(length_lum / 1000) + " ")		# ?
+f_ies.write(num2str(width_lumarea / 1000) + " ")		# ?
+f_ies.write(num2str(length_lumarea / 1000) + " ")		# ?
 f_ies.write(num2str(height_lum / 1000) + "\n")	# ?
 
 f_ies.write("1.0 1.0 ")			# ? ballast factor, future use
 f_ies.write(num2str(power))
 f_ies.write("\n")
 line = ""
-for i in range(0, ng):
-	if len(line + num2str(angle_g[i])) > 237:
+for angle in angle_g:
+	if len(line + num2str(angle)) > 237:
 		f_ies.write(line + "\n")
 		line = " "
-	line += num2str(angle_g[i]) + " "
+	line += num2str(angle) + " "
 f_ies.write(line + "\n")
 line = ""
-for i in range(0, mc):
-	if len(line + num2str(angle_c[i])) > 237:
+for angle in angle_c:
+	if len(line + num2str(angle)) > 237:
 		f_ies.write(line + "\n")
 		line = " "
-	line += num2str(angle_c[i]) + " "
+	line += num2str(angle) + " "
 f_ies.write(line + "\n")
-for i in range(0, len(lum_intensity)):
+for intens in lum_intensity:
 	line = ""
-	for j in range(0, len(lum_intensity[i])):
-		it = num2str(lum_intensity[i][j] * float(tlfl) / 1000)
+	for inten in intens:
+		it = num2str(inten * float(tlfl) / 1000)
 		if len(line + it) > 237:
 			f_ies.write(line + "\n")
 			line = " "
