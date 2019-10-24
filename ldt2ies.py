@@ -48,6 +48,7 @@ for i in range(0, 10):							# DR - Direct ratios for room indices k = 0.6 ... 5
 angle_c = []
 for i in range(0, mc):							# Angles C (beginning with 0 degrees)
 	angle_c.append(float(f_ldt.readline()))
+angle_c.append(360)									# ADD 360 DEG
 angle_g = []
 for i in range(0, ng):							# Angles G (beginning with 0 degrees)
 	angle_g.append(float(f_ldt.readline()))
@@ -62,6 +63,7 @@ for i in range(0, mc):
 	if j < ng - 1:
 		lum_intensity.pop()
 		break
+lum_intensity.append(lum_intensity[0])
 
 f_ies.write("IESNA:LM-63-2002\n")
 f_ies.write("[TEST] ")
@@ -91,7 +93,7 @@ else:
 	f_ies.write(num2str(tlfl) + " ")	# ?
 f_ies.write(num2str(cffli) + " ")		# ? multiplier
 f_ies.write(num2str(ng) + " ")
-f_ies.write(num2str(mc) + " ")
+f_ies.write(num2str(mc + 1) + " ")
 f_ies.write(num2str(1) + " ")		# ? photometric type
 f_ies.write(num2str(2) + " ")		# ? unit type
 f_ies.write(num2str(width_lumarea / 1000) + " ")		# ?
