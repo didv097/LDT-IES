@@ -18,10 +18,10 @@ file_name = f_ldt.readline()		# File name
 date = f_ldt.readline()					# Date/user
 temp = date.find("-")
 if temp >= 0:
-	user = date[temp + 2 : len(date)]		# ?
+	user = date[temp + 2 : len(date) - 1]
 	date = date[0 : temp - 1] + "\n"
 else:
-	user = "\n"
+	user = ""
 length_lum = float(f_ldt.readline())					# Length/diameter of luminaire (mm)
 width_lum = float(f_ldt.readline())						# b - Width of luminaire (mm) (b = 0 for circular luminaire)
 height_lum = float(f_ldt.readline())					# Height of luminaire (mm)
@@ -67,8 +67,9 @@ lum_intensity.append(lum_intensity[0])
 
 f_ies.write("IESNA:LM-63-2002\n")
 f_ies.write("[TEST] ")
-# f_ies.write(meas_report)
-f_ies.write(user)
+f_ies.write(user + "\n")
+f_ies.write("[TESTLAB] ")
+f_ies.write(user + " - Test lab\n")
 f_ies.write("[MANUFAC] ")
 f_ies.write(company_name)
 f_ies.write("[ISSUEDATE] ")
@@ -90,17 +91,17 @@ if num_lam < 0:
 	f_ies.write("1 -1 ")
 else:
 	f_ies.write(num2str(num_lam) + " ")
-	f_ies.write(num2str(tlfl) + " ")	# ?
-f_ies.write(num2str(cffli) + " ")		# ? multiplier
+	f_ies.write(num2str(tlfl) + " ")	# 
+f_ies.write(num2str(cffli) + " ")		# multiplier
 f_ies.write(num2str(ng) + " ")
 f_ies.write(num2str(mc + 1) + " ")
-f_ies.write(num2str(1) + " ")		# ? photometric type
-f_ies.write(num2str(2) + " ")		# ? unit type
-f_ies.write(num2str(width_lumarea / 1000) + " ")		# ?
-f_ies.write(num2str(length_lumarea / 1000) + " ")		# ?
-f_ies.write(num2str(height_lum / 1000) + "\n")	# ?
+f_ies.write(num2str(1) + " ")		# photometric type
+f_ies.write(num2str(2) + " ")		# unit type
+f_ies.write(num2str(width_lumarea / 1000) + " ")
+f_ies.write(num2str(length_lumarea / 1000) + " ")
+f_ies.write(num2str(height_lum / 1000) + "\n")
 
-f_ies.write("1.0 1.0 ")			# ? ballast factor, future use
+f_ies.write("1.0 1.0 ")			# ballast factor, future use
 f_ies.write(num2str(power))
 f_ies.write("\n")
 line = ""
