@@ -67,8 +67,8 @@ lum_intensity.append(lum_intensity[0])
 
 f_ies.write("IESNA:LM-63-2002\n")
 f_ies.write("[TEST] ")
-f_ies.write(meas_report)
-# f_ies.write(user)
+# f_ies.write(meas_report)
+f_ies.write(user)
 f_ies.write("[MANUFAC] ")
 f_ies.write(company_name)
 f_ies.write("[ISSUEDATE] ")
@@ -82,8 +82,8 @@ if len(lum_name) > 1:
 if len(type_lam) > 1:
 	f_ies.write("[LAMP] ")
 	f_ies.write(type_lam)
-# f_ies.write("[_SERIALNUMBER] ")
-# f_ies.write(meas_report)
+f_ies.write("[_SERIALNUMBER] ")
+f_ies.write(meas_report)
 f_ies.write("TILT=NONE\n")
 
 if num_lam < 0:

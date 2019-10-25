@@ -69,6 +69,7 @@ while True:
 	if line[0] != ' ':
 		break
 	hor_angles += [float(i) for i in line.split()]
+hor_angles.pop()																	# Remove 360 deg
 
 angles = []
 for i in range(cnt_hor_angles):
@@ -81,15 +82,15 @@ for i in range(cnt_hor_angles):
 
 f_ldt.write(manufac + "\n")
 f_ldt.write("2\n4\n")
-f_ldt.write(num2str(cnt_hor_angles) + "\n")
+f_ldt.write(num2str(cnt_hor_angles - 1) + "\n")			# Remove 360 deg
 f_ldt.write(num2str(hor_angles[1] - hor_angles[0]) + "\n")
 f_ldt.write(num2str(cnt_ver_angles) + "\n")
 f_ldt.write(num2str(ver_angles[1] - ver_angles[0]) + "\n")
-f_ldt.write(test + "\n")
+f_ldt.write(serial_number + "\n")
 f_ldt.write(luminaire + "\n")
 f_ldt.write(lum_num + "\n")		# luminaire number
 f_ldt.write("result.ldt\n")
-f_ldt.write(issue_date + "\n")
+f_ldt.write(issue_date + " - " + test + "\n")				# ? "date - test_string"
 f_ldt.write(num2str(length * 1000) + "\n")
 f_ldt.write(num2str(width * 1000) + "\n")
 f_ldt.write(num2str(height * 1000) + "\n")
