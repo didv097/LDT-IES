@@ -43,19 +43,19 @@ col_temp = float(f_ldt.readline())	# Color appearance / color temperature of lam
 col_ren = float(f_ldt.readline())		# Color rendering group / color rendering index
 power = float(f_ldt.readline())			# Wattage including ballast (W)
 dr = []
-for i in range(0, 10):							# DR - Direct ratios for room indices k = 0.6 ... 5
+for i in range(10):							# DR - Direct ratios for room indices k = 0.6 ... 5
 	dr.append(float(f_ldt.readline()))
 angle_c = []
-for i in range(0, mc):							# Angles C (beginning with 0 degrees)
+for i in range(mc):							# Angles C (beginning with 0 degrees)
 	angle_c.append(float(f_ldt.readline()))
 angle_c.append(360)									# ADD 360 DEG
 angle_g = []
-for i in range(0, ng):							# Angles G (beginning with 0 degrees)
+for i in range(ng):							# Angles G (beginning with 0 degrees)
 	angle_g.append(float(f_ldt.readline()))
 lum_intensity = []
-for i in range(0, mc):
+for i in range(mc):
 	lum_intensity.append([])
-	for j in range(0, ng):
+	for j in range(ng):
 		line = f_ldt.readline()
 		if line == "":
 			break
