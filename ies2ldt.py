@@ -81,7 +81,7 @@ for i in range(cnt_hor_angles):
 		angles[i] += [float(j) for j in line.split()]
 
 f_ldt.write(manufac + "\n")
-f_ldt.write("2\n4\n")
+f_ldt.write("2\n0\n")
 f_ldt.write(num2str(cnt_hor_angles - 1) + "\n")			# Remove 360 deg
 f_ldt.write(num2str(hor_angles[1] - hor_angles[0]) + "\n")
 f_ldt.write(num2str(cnt_ver_angles) + "\n")
