@@ -78,7 +78,8 @@ for i in range(mc):
 			p0 = lum_intensity[i][it_idx - 1]
 			p3 = lum_intensity[i][it_idx + 2]
 		tmp_lum_intensity[i].append(interpolate(p0, p1, p2, p3, x % dg / dg))
-	tmp_lum_intensity[i].append(interpolate(lum_intensity[i][ng - 3], lum_intensity[i][ng - 2], lum_intensity[i][ng - 1], lum_intensity[i][ng - 1], 1))
+	tmp_lum_intensity[i].append(interpolate(lum_intensity[i][ng - 3], \
+		lum_intensity[i][ng - 2], lum_intensity[i][ng - 1], lum_intensity[i][ng - 1], 1))
 
 lum_intensity = []
 for i in range(new_mc):
