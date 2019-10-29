@@ -2,7 +2,11 @@ f_ies = open("original.ies", "r")
 f_ldt = open("result.ldt", "w")
 
 def num2str(n):
-	return "{:g}".format(n)
+	s = str(int(n * 10000) / 10000)
+	if '.' in s:
+		return s.rstrip('0').rstrip('.')
+	else:
+		return s
 
 test = ""
 manufac = ""

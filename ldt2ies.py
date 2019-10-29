@@ -2,7 +2,11 @@ f_ldt = open("original.ldt", "r")
 f_ies = open("result.ies", "w")
 
 def num2str(n):
-	return "{:g}".format(n)
+	s = str(int(n * 10000) / 10000)
+	if '.' in s:
+		return s.rstrip('0').rstrip('.')
+	else:
+		return s
 
 company_name = f_ldt.readline()
 ltyp = int(f_ldt.readline())		# Type indicator
@@ -106,14 +110,14 @@ f_ies.write(num2str(power))
 f_ies.write("\n")
 line = ""
 for angle in angle_g:
-	if len(line + num2str(angle)) > 237:
+	if len(line + num2str(angle)) > 238:
 		f_ies.write(line + "\n")
 		line = " "
 	line += num2str(angle) + " "
 f_ies.write(line + "\n")
 line = ""
 for angle in angle_c:
-	if len(line + num2str(angle)) > 237:
+	if len(line + num2str(angle)) > 238:
 		f_ies.write(line + "\n")
 		line = " "
 	line += num2str(angle) + " "
@@ -122,7 +126,7 @@ for intens in lum_intensity:
 	line = ""
 	for inten in intens:
 		it = num2str(inten * float(tlfl) / 1000)
-		if len(line + it) > 237:
+		if len(line + it) > 238:
 			f_ies.write(line + "\n")
 			line = " "
 		line += it + " "

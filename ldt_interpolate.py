@@ -7,7 +7,11 @@ f_org = open("original.ldt", "r")
 f_res = open("result.ldt", "w")
 
 def num2str(n):
-	return "{:g}".format(n)
+	s = str(int(n * 10000) / 10000)
+	if '.' in s:
+		return s.rstrip('0').rstrip('.')
+	else:
+		return s
 
 for i in range(3):
 	f_res.write(f_org.readline())
@@ -17,20 +21,23 @@ dc = float(f_org.readline())		# Distance between C-planes
 ng = int(f_org.readline())			# Number of luminous intensities in each C-plane
 dg = float(f_org.readline())		# Distance between luminous intensities per C-plane
 
+max_angle_c = mc * dc						# 360
+max_angle_g = (ng - 1) * dg			# 90
+
 if new_mc < 1:
 	f_res.write(num2str(mc) + "\n")
 	f_res.write(num2str(dc) + "\n")
 	new_mc = mc
 else:
 	f_res.write(num2str(new_mc) + "\n")
-	f_res.write(num2str(360 / new_mc) + "\n")
+	f_res.write(num2str(max_angle_c / new_mc) + "\n")
 if new_ng < 1:
 	f_res.write(num2str(ng) + "\n")
 	f_res.write(num2str(dg) + "\n")
 	new_ng = ng
 else:
 	f_res.write(num2str(new_ng) + "\n")
-	f_res.write(num2str(90 / (new_ng - 1)) + "\n")
+	f_res.write(num2str(max_angle_g / (new_ng - 1)) + "\n")
 
 for i in range(35):
 	f_res.write(f_org.readline())
@@ -39,9 +46,9 @@ for i in range(mc + ng):
 	f_org.readline()
 
 for i in range(new_mc):
-	f_res.write(num2str(360 / new_mc * i) + "\n")
+	f_res.write(num2str(max_angle_c / new_mc * i) + "\n")
 for i in range(new_ng):
-	f_res.write(num2str(90 / (new_ng - 1) * i) + "\n")
+	f_res.write(num2str(max_angle_g / (new_ng - 1) * i) + "\n")
 
 lum_intensity = []
 tmp_lum_intensity = []
@@ -64,7 +71,7 @@ def interpolate(p0, p1, p2, p3, x):
 for i in range(mc):
 	tmp_lum_intensity.append([])
 	for j in range(new_ng - 1):
-		x = 90 / (new_ng - 1) * j
+		x = max_angle_g / (new_ng - 1) * j
 		it_idx = int(x / dg)
 		p1 = lum_intensity[i][it_idx]
 		p2 = lum_intensity[i][it_idx + 1]
@@ -89,7 +96,7 @@ for i in range(new_mc):
 
 for j in range(new_ng):
 	for i in range(new_mc):
-		x = 360 / new_mc * i
+		x = max_angle_c / new_mc * i
 		it_idx = int(x / dc)
 		p1 = tmp_lum_intensity[it_idx][j]
 		p2 = tmp_lum_intensity[(it_idx + 1) % mc][j]
