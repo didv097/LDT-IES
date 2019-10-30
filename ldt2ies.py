@@ -109,23 +109,23 @@ f_ies.write(num2str(length_lumarea / 1000) + " ")
 f_ies.write(num2str(height_lum / 1000) + "\n")
 
 f_ies.write("1.0 1.0 ")			# ballast factor, future use
-f_ies.write(num2str(power))
+f_ies.write(num2str(power))	# input watts
 f_ies.write("\n")
 line = ""
-for angle in angle_g:				# write angles G (maximum 240 characters in line)
+for angle in angle_g:				# vertical angles (maximum 240 characters in line)
 	if len(line + num2str(angle)) > 238:
 		f_ies.write(line + "\n")
 		line = " "
 	line += num2str(angle) + " "
 f_ies.write(line + "\n")
 line = ""
-for angle in angle_c:				# write angles C (maximum 240 characters in line)
+for angle in angle_c:				# horizontal angles (maximum 240 characters in line)
 	if len(line + num2str(angle)) > 238:
 		f_ies.write(line + "\n")
 		line = " "
 	line += num2str(angle) + " "
 f_ies.write(line + "\n")
-for intens in lum_intensity:	# write luminous intensities
+for intens in lum_intensity:	# Candela values
 	line = ""
 	for inten in intens:
 		it = num2str(inten * float(tlfl) / 1000)

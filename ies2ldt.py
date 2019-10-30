@@ -87,38 +87,38 @@ for i in range(cnt_hor_angles):								# candela values
 			break
 		angles[i] += [float(j) for j in line.split()]
 
-f_ldt.write(manufac + "\n")
-f_ldt.write("2\n0\n")
-f_ldt.write(num2str(cnt_hor_angles - 1) + "\n")			# Remove 360 deg
-f_ldt.write(num2str(hor_angles[1] - hor_angles[0]) + "\n")
-f_ldt.write(num2str(cnt_ver_angles) + "\n")
-f_ldt.write(num2str(ver_angles[1] - ver_angles[0]) + "\n")
-f_ldt.write(serial_number + "\n")
-f_ldt.write(luminaire + "\n")
-f_ldt.write(lum_num + "\n")
-f_ldt.write("result.ldt\n")
-f_ldt.write(issue_date + " - " + test + "\n")
-f_ldt.write(num2str(length * 1000) + "\n")
-f_ldt.write(num2str(width * 1000) + "\n")
-f_ldt.write(num2str(height * 1000) + "\n")
-f_ldt.write(num2str(length * 1000) + "\n")
-f_ldt.write(num2str(width * 1000) + "\n")
-f_ldt.write("0\n0\n0\n0\n")
-f_ldt.write("100\n100\n")
-f_ldt.write(num2str(multiplier) + "\n")
-f_ldt.write("0\n1\n")
-f_ldt.write(num2str(cnt_lamps) + "\n")
-f_ldt.write(type_lamp + "\n")
-f_ldt.write(num2str(lumens) + "\n")
-f_ldt.write("\n\n")
-f_ldt.write(num2str(input_watts) + "\n")
-for i in range(10):
+f_ldt.write(manufac + "\n")												# Company
+f_ldt.write("2\n0\n")															# Ityp, Isym
+f_ldt.write(num2str(cnt_hor_angles - 1) + "\n")		# Mc - Remove 360 deg
+f_ldt.write(num2str(hor_angles[1] - hor_angles[0]) + "\n")	# Dc
+f_ldt.write(num2str(cnt_ver_angles) + "\n")				# Ng
+f_ldt.write(num2str(ver_angles[1] - ver_angles[0]) + "\n")	# Dg
+f_ldt.write(serial_number + "\n")									# Measurement report number
+f_ldt.write(luminaire + "\n")											# Luminaire name
+f_ldt.write(lum_num + "\n")												# Luminaire number
+f_ldt.write("result.ldt\n")												# File name
+f_ldt.write(issue_date + " - " + test + "\n")			# Date/user
+f_ldt.write(num2str(length * 1000) + "\n")				# Length/diameter of luminaire (mm)
+f_ldt.write(num2str(width * 1000) + "\n")					# b - Width of luminaire (mm) (b = 0 for circular luminaire)
+f_ldt.write(num2str(height * 1000) + "\n")				# Height of luminaire (mm)
+f_ldt.write(num2str(length * 1000) + "\n")				# Length/diameter of luminous area (mm)
+f_ldt.write(num2str(width * 1000) + "\n")					# b1 - Width of luminous area (mm) (b1 = 0 for circular luminous area of luminaire)
+f_ldt.write("0\n0\n0\n0\n")												# Height of luminous area C-planes (mm)
+f_ldt.write("100\n100\n")													# DFF, LORL
+f_ldt.write(num2str(multiplier) + "\n")						# Conversion factor for luminous intensities (depending on measurement)
+f_ldt.write("0\n1\n")															# Tilt of luminaire during measurement, Number of standard sets of lamps
+f_ldt.write(num2str(cnt_lamps) + "\n")						# Number of lamps
+f_ldt.write(type_lamp + "\n")											# Type of lamps
+f_ldt.write(num2str(lumens) + "\n")								# Total luminous flux of lamps (lm)
+f_ldt.write("\n\n")																# Color appearance, Color rendering group
+f_ldt.write(num2str(input_watts) + "\n")					# Wattage including ballast (W)
+for i in range(10):																# DR - Direct ratios for room indices
 	f_ldt.write("1\n")
-for i in range(len(hor_angles)):
+for i in range(len(hor_angles)):									# Angles C (beginning with 0 degrees)
 	f_ldt.write(num2str(hor_angles[i]) + "\n")
-for i in range(len(ver_angles)):
+for i in range(len(ver_angles)):									# Angles G (beginning with 0 degrees)
 	f_ldt.write(num2str(ver_angles[i]) + "\n")
-for i in range(len(angles)):
+for i in range(len(angles)):											# Luminous intensity distribution (cd/1000 lumens)
 	for j in range(len(angles[i])):
 		f_ldt.write(num2str(angles[i][j] / lumens * 1000) + "\n")
 
