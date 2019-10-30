@@ -1,3 +1,6 @@
+# https://docs.agi32.com/PhotometricToolbox/Content/Open_Tool/eulumdat_file_format.htm
+# https://docs.agi32.com/AGi32/Content/references/IDH_iesna_standard_file_format.htm
+
 f_ldt = open("original.ldt", "r")
 f_ies = open("result.ies", "w")
 
