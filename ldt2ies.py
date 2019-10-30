@@ -1,7 +1,7 @@
 f_ldt = open("original.ldt", "r")
 f_ies = open("result.ies", "w")
 
-def num2str(n):
+def num2str(n):									# convert number to string
 	s = str(int(n * 10000) / 10000)
 	if '.' in s:
 		return s.rstrip('0').rstrip('.')
@@ -22,8 +22,8 @@ file_name = f_ldt.readline()		# File name
 date = f_ldt.readline()					# Date/user
 temp = date.find("-")
 if temp >= 0:
-	user = date[temp + 2 : len(date) - 1]
-	date = date[0 : temp - 1] + "\n"
+	user = date[temp + 2 : len(date) - 1]	# User
+	date = date[0 : temp - 1] + "\n"			# Date
 else:
 	user = ""
 length_lum = float(f_ldt.readline())					# Length/diameter of luminaire (mm)
@@ -52,12 +52,12 @@ for i in range(10):							# DR - Direct ratios for room indices k = 0.6 ... 5
 angle_c = []
 for i in range(mc):							# Angles C (beginning with 0 degrees)
 	angle_c.append(float(f_ldt.readline()))
-angle_c.append(360)									# ADD 360 DEG
+angle_c.append(360)							# Append 360 DEG
 angle_g = []
 for i in range(ng):							# Angles G (beginning with 0 degrees)
 	angle_g.append(float(f_ldt.readline()))
 lum_intensity = []
-for i in range(mc):
+for i in range(mc):							# Read luminous intensities
 	lum_intensity.append([])
 	for j in range(ng):
 		line = f_ldt.readline()
@@ -67,7 +67,7 @@ for i in range(mc):
 	if j < ng - 1:
 		lum_intensity.pop()
 		break
-lum_intensity.append(lum_intensity[0])
+lum_intensity.append(lum_intensity[0])	# Append luminous intensities for 360 DEG
 
 f_ies.write("IESNA:LM-63-2002\n")
 f_ies.write("[TEST] ")
@@ -109,20 +109,20 @@ f_ies.write("1.0 1.0 ")			# ballast factor, future use
 f_ies.write(num2str(power))
 f_ies.write("\n")
 line = ""
-for angle in angle_g:
+for angle in angle_g:				# write angles G (maximum 240 characters in line)
 	if len(line + num2str(angle)) > 238:
 		f_ies.write(line + "\n")
 		line = " "
 	line += num2str(angle) + " "
 f_ies.write(line + "\n")
 line = ""
-for angle in angle_c:
+for angle in angle_c:				# write angles C (maximum 240 characters in line)
 	if len(line + num2str(angle)) > 238:
 		f_ies.write(line + "\n")
 		line = " "
 	line += num2str(angle) + " "
 f_ies.write(line + "\n")
-for intens in lum_intensity:
+for intens in lum_intensity:	# write luminous intensities
 	line = ""
 	for inten in intens:
 		it = num2str(inten * float(tlfl) / 1000)

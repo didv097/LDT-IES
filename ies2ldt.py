@@ -1,7 +1,7 @@
 f_ies = open("original.ies", "r")
 f_ldt = open("result.ldt", "w")
 
-def num2str(n):
+def num2str(n):									# convert number to string
 	s = str(int(n * 10000) / 10000)
 	if '.' in s:
 		return s.rstrip('0').rstrip('.')
@@ -42,41 +42,41 @@ while True:
 
 line = f_ies.readline()
 items = line.split()
-cnt_lamps = int(items[0])
-lumens = int(items[1])
-multiplier = int(items[2])
-cnt_ver_angles = int(items[3])
-cnt_hor_angles = int(items[4])
-phot_type = int(items[5])
-unit_type = int(items[6])
-width = float(items[7])
-length = float(items[8])
-height = float(items[9])
+cnt_lamps = int(items[0])				# number of lamps
+lumens = int(items[1])					# lumens/lamp
+multiplier = int(items[2])			# multiplier
+cnt_ver_angles = int(items[3])	# number of vertical angles
+cnt_hor_angles = int(items[4])	# number of horizontal angles
+phot_type = int(items[5])				# photometric type
+unit_type = int(items[6])				# units type
+width = float(items[7])					# width
+length = float(items[8])				# length
+height = float(items[9])				# height
 
 line = f_ies.readline()
 items = line.split()
-bal_fac = float(items[0])
-fut_use = float(items[1])
-input_watts = float(items[2])
+bal_fac = float(items[0])				# ballast factor
+fut_use = float(items[1])				# future use
+input_watts = float(items[2])		# input watts
 
 line = f_ies.readline()
-ver_angles = [float(i) for i in line.split()]
+ver_angles = [float(i) for i in line.split()]	# vertical angles
 while True:
 	line = f_ies.readline()
 	if line[0] != ' ':
 		break
 	ver_angles += [float(i) for i in line.split()]
 
-hor_angles = [float(i) for i in line.split()]
+hor_angles = [float(i) for i in line.split()]	# horizontal angles
 while True:
 	line = f_ies.readline()
 	if line[0] != ' ':
 		break
 	hor_angles += [float(i) for i in line.split()]
-hor_angles.pop()																	# Remove 360 deg
+hor_angles.pop()															# Remove 360 deg from horizontal angles
 
 angles = []
-for i in range(cnt_hor_angles):
+for i in range(cnt_hor_angles):								# candela values
 	angles.append([float(j) for j in line.split()])
 	while True:
 		line = f_ies.readline()
@@ -92,9 +92,9 @@ f_ldt.write(num2str(cnt_ver_angles) + "\n")
 f_ldt.write(num2str(ver_angles[1] - ver_angles[0]) + "\n")
 f_ldt.write(serial_number + "\n")
 f_ldt.write(luminaire + "\n")
-f_ldt.write(lum_num + "\n")		# luminaire number
+f_ldt.write(lum_num + "\n")
 f_ldt.write("result.ldt\n")
-f_ldt.write(issue_date + " - " + test + "\n")				# ? "date - test_string"
+f_ldt.write(issue_date + " - " + test + "\n")
 f_ldt.write(num2str(length * 1000) + "\n")
 f_ldt.write(num2str(width * 1000) + "\n")
 f_ldt.write(num2str(height * 1000) + "\n")
@@ -105,9 +105,9 @@ f_ldt.write("100\n100\n")
 f_ldt.write(num2str(multiplier) + "\n")
 f_ldt.write("0\n1\n")
 f_ldt.write(num2str(cnt_lamps) + "\n")
-f_ldt.write(type_lamp + "\n")		# type of lamps
+f_ldt.write(type_lamp + "\n")
 f_ldt.write(num2str(lumens) + "\n")
-f_ldt.write("\n\n")		# 
+f_ldt.write("\n\n")
 f_ldt.write(num2str(input_watts) + "\n")
 for i in range(10):
 	f_ldt.write("1\n")
