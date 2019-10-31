@@ -1,7 +1,7 @@
 import sys
 
 new_mc = int(sys.argv[1])						# first parameter - new org_mc
-new_ng = int(sys.argv[2])						# first parameter - new org_ng
+new_ng = int(sys.argv[2])						# second parameter - new org_ng
 
 f_org = open("original.ldt", "r")
 f_res = open("result.ldt", "w")
