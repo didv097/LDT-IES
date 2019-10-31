@@ -113,7 +113,7 @@ for j in range(new_ng):							# interpolate angles C
 			p3 = tmp_lum_intensity[(it_idx + 2) % org_mc][j]
 		lum_intensity[i][j] = interpolate(p0, p1, p2, p3, x % org_dc / org_dc)
 
-for i in range(new_mc):						# write new angles
+for i in range(new_mc):						# write new intensities
 	for j in range(new_ng):
 		f_res.write(num2str(lum_intensity[i][j]) + "\n")
 
