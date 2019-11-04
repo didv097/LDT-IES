@@ -33,7 +33,7 @@ if new_dc <= 0:											# validate parameters
 	f_res.write(num2str(org_dc) + "\n")
 	new_dc = org_dc
 else:
-	new_mc = max_angle_c / new_dc
+	new_mc = int(max_angle_c / new_dc)
 	f_res.write(num2str(new_mc) + "\n")
 	f_res.write(num2str(new_dc) + "\n")
 if new_dg <= 0:
@@ -41,7 +41,7 @@ if new_dg <= 0:
 	f_res.write(num2str(org_dg) + "\n")
 	new_dg = org_dg
 else:
-	new_ng = max_angle_g / new_dg + 1
+	new_ng = int(max_angle_g / new_dg) + 1
 	f_res.write(num2str(new_ng) + "\n")
 	f_res.write(num2str(new_dg) + "\n")
 
